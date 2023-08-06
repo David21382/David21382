@@ -1,0 +1,125 @@
+import random
+
+def game_over(losing_team):
+    print(f"Game Over! {losing_team} lost the challenge and voted someone off.")
+    print("The island's hazardous conditions took a toll.")
+    exit()
+
+def get_random_challenge():
+    challenges = [
+        "Awful Waffle Cook-Off",
+        "Boney Island Race",
+        "Eat It or Wear It",
+        "Paintball Deer Hunt",
+        "Toxic Treasure Hunt",
+        "Camp Cleanup",
+        "Raft Race",
+        "Campfire Song Sing-Off",
+        "Monster Movie",
+        "Mine Cart Race",
+        "Scream Extractor",
+        "Totem Pole Building",
+        "Toxic River Race",
+        "Scavenger Hunt",
+        "Life-Size Chess",
+        "Trapped in a Cage",
+        "Radioactive Egg Hunt",
+        "Mud-Slinging",
+        "Human Knot",
+        "Survival Pictionary",
+        "Toxic Fruit Toss",
+        "Shark Bait",
+        "Toxic Juice Bar",
+        "Dynamite Fishing",
+        "Toxic Barrel Roll",
+        "Tug of War",
+        "Toxic Lava Run",
+        # Add more challenges here based on Total Drama: Revenge of the Island
+    ]
+    return random.choice(challenges)
+
+def get_random_invincibility_challenge():
+    invincibility_challenges = [
+        "Chris Trivia",
+        "Tightrope Walk",
+        "Target Practice",
+        "Shark Hunt",
+        # Add more invincibility challenges here based on Total Drama: Revenge of the Island
+    ]
+    return random.choice(invincibility_challenges)
+
+def ultimate_showdown():
+    print("Final Fighting Challenge: Ultimate Showdown!")
+    print("The final two competitors will face off in a fierce battle.")
+    print("They must use their wits and skills to outsmart and overpower each other.")
+    print("The ultimate survivor will be determined in this fight to the death!")
+
+    competitor1_skill = random.randint(1, 100)
+    competitor2_skill = random.randint(1, 100)
+
+    print(f"Competitor 1 Skill Level: {competitor1_skill}")
+    print(f"Competitor 2 Skill Level: {competitor2_skill}")
+
+    if competitor1_skill > competitor2_skill:
+        print("Congratulations! Competitor 1 is the ultimate survivor and wins the game!")
+        exit()
+    else:
+        print("Congratulations! Competitor 2 is the ultimate survivor and wins the game!")
+        exit()
+
+def final_challenge(eliminated_players):
+    print("Final Challenge: Vote for the Winner!")
+    print("The eliminated players will vote for the winner among the final two competitors.")
+    print("If there's a tie in the voting, the tied competitors will face off in a fight to the death!")
+
+    votes = {}
+    for player in eliminated_players:
+        vote = random.choice(["Competitor 1", "Competitor 2"])
+        votes[player] = vote
+        print(f"{player} votes for {vote}.")
+
+    vote_count = {v: 0 for v in votes.values()}
+    for vote in votes.values():
+        vote_count[vote] += 1
+
+    max_votes = max(vote_count.values())
+    finalists = [competitor for competitor, votes in vote_count.items() if votes == max_votes]
+
+    if len(finalists) == 1:
+        print(f"{finalists[0]} is the winner!")
+    else:
+        print("It's a tie! The tied competitors will face off in a fight to the death.")
+        ultimate_showdown()
+
+if __name__ == "__main__":
+    print("Welcome to Total Drama: Revenge of the Island!")
+    print("You find yourself on a remote island with two teams of 10 members each.")
+    print("The island is covered in radioactive and hazardous material.")
+    print("Your goal is to win the challenges, survive, and outwit the other team to be the last person standing.")
+
+    characters = [
+        "Staci", "Dakota", "B", "Dawn", "Sam", "Brick",
+        "Anne-Marie", "Mike", "Jo", "Scott", "Zoey",
+        "Lightning", "Cameron", "Owen", "Gwen", "Heather",
+        "Duncan", "Leshawna", "Geoff", "Izzy"
+    ]
+
+    team_1 = random.sample(characters, 10)
+    team_2 = random.sample([char for char in characters if char not in team_1], 10)
+
+    invincibility_winner = None
+
+    for round_number in range(1, 22):
+        if round_number == 13:
+            print("The teams merge! It's now an individual game!")
+            team_1.extend(team_2)
+
+        if round_number <= 11 and round_number % 2 == 0:
+            print(f"\nRound {round_number} Team Challenge: {get_random_challenge()}")
+
+            # Simulate team performances for the team challenge
+            team_1_points = random.randint(30, 100)
+            team_2_points = random.randint(30, 100)
+
+            # Simulate hazardous conditions
+            team_1_points -= random.randint(10, 30
